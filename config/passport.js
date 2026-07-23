@@ -8,12 +8,14 @@ const secret = "secretCuisine123";
 
 module.exports = function (app) {
   passport.serializeUser(function (user, done) {
+    console.log("serializeUser");
     done(null, user.id);
   });
 
   passport.deserializeUser(async function (id, done) {
     try {
       const user = await User.findById(id);
+      console.log("deserializeUser");
       done(null, user);
     } catch (error) {
       done(error, null);
